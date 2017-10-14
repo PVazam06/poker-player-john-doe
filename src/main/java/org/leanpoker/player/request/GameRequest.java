@@ -1,8 +1,12 @@
 
 package org.leanpoker.player.request;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.leanpoker.player.PlayerServlet;
+
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
@@ -58,7 +62,7 @@ public class GameRequest {
 
     public GameRequest(JsonElement request) {
     	requestJson = request.getAsJsonObject();
-		
+		this.players = getPlayerArray("players");
 		this.tournamentId = getStringField("tournament_id");
 		this.gameId = getStringField("game_id");
 		this.round = getIntegerField("round");
@@ -71,7 +75,17 @@ public class GameRequest {
 		this.pot = getIntegerField("pot");
 	}
     
-    private Integer getIntegerField(String field) {
+    private List<PlayerJson> getPlayerArray(String field) {
+    	List<PlayerJson> playerList = new ArrayList<PlayerJson>();
+		JsonArray playersArray = requestJson.get("players").getAsJsonArray();
+		for (JsonElement player : playersArray) {
+			PlayerJson p = new PlayerJson(player);
+			playerList.add(p);
+		}	
+		return playerList;
+	}
+
+	private Integer getIntegerField(String field) {
 		return requestJson.get(field).getAsInt();
 	}
 
