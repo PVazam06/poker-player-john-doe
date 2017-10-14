@@ -28,45 +28,57 @@ public class Player {
 
 	public static int betRequest(JsonElement request) {
 		System.out.println("----incomming request--------");
-		GameRequest req = null;
-		try {
+		String jsonRequest = jsonHelper.toJson(request);
+		System.out.println("request json: " + jsonRequest);
 
-			String jsonRequest = jsonHelper.toJson(request);
-			System.out.println("request json: " + jsonRequest);
+		GameRequest req = jsonHelper.fromJson(request, GameRequest.class);
 
-			req = jsonHelper.fromJson(request, GameRequest.class);
-		} catch (Exception e) {
-			System.out.println("failed to serialze json return 520");
+		return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
 
-		}
-		if (req != null) {
-			try {
-
-				System.out.println("game request is serialized now");
-
-				Collection<Card> allCards = listCards(req);
-
-				String json = jsonHelper.toJson(allCards);
-				json = "cards=" + json;
-
-				InputStream res = client.Post("http://rainman.leanpoker.org/rank", json);
-
-				JsonElement rankObject = jsonHelper.toJsonTree(res);
-
-				int rank = rankObject.getAsJsonObject().get("rank").getAsInt();
-
-				System.out.println("our rank: " + rank);
-
-				int returnValue = RankHelper.getReturnValue(rank, req);
-
-				return returnValue;
-			} catch (Exception e) {
-				System.out.println("failed to get rank use default logic ");
-				return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
-			}
-		}
-		return 520;
+		//return 520;
 	}
+	//// System.out.println("game request is serialized now");
+	////
+	////
+	//// Collection<Card> allCards = listCards(req);
+	////
+	//// String json = jsonHelper.toJson(allCards);
+	//// json = "cards="+json;
+	////
+	//// InputStream res = client.Post("http://rainman.leanpoker.org/rank",
+	//// json);
+	////
+	//// JsonElement rankObject = jsonHelper.toJsonTree(res);
+	////
+	//// int rank = rankObject.getAsJsonObject().get("rank").getAsInt();
+	////
+	//// System.out.println("our rank: "+ rank);
+	////
+	//// int returnValue = RankHelper.getReturnValue(rank, req);
+	////
+	//// int minraise = req.getMinimum_raise();
+	////
+	//// System.out.println("min raise: " + minraise);
+	////
+	//// return returnValue;
+	//
+	//// }catch(JsonParseException jpe){
+	//// System.out.println("json pars exception");
+	//// jpe.printStackTrace();
+	//// }catch (Exception e) {
+	//// System.out.println("---------- error log out----------");
+	//// e.printStackTrace();
+	////
+	//// }
+	////
+	//// try {
+	//// return req.getCurrentBuyIn() -
+	//// req.getPlayers().get(req.getIn_action()).getBet();
+	//// } catch (Exception e) {
+	//// e.printStackTrace();
+	//// }
+	// return 520;
+	// }
 
 	public static void showdown(JsonElement game) {
 	}
