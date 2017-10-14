@@ -31,8 +31,8 @@ public class Player {
 	public static int betRequest(JsonElement request) {
 		System.out.println("----incomming request--------");
 		try {
-			String jsonRequest = jsonHelper.toJson(request);
-			System.out.println("request json: " +jsonRequest);
+			//String jsonRequest = jsonHelper.toJson(request);
+			//System.out.println("request json: " +jsonRequest);
 			
 			req = jsonHelper.fromJson(request, GameRequest.class);
 			
