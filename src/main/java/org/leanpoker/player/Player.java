@@ -58,7 +58,7 @@ public class Player {
 			
 			System.out.println("min raise: " + minraise);
 			
-			return minraise;
+			return returnValue;
 
 		}catch(JsonParseException jpe){
 			System.out.println("json pars exception");
