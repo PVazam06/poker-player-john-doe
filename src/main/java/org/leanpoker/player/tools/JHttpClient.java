@@ -14,18 +14,36 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+import com.google.gson.JsonElement;
+
 public class JHttpClient {
 
-	public InputStream Post(String url, String body) throws ClientProtocolException, IOException{
-		
+   private CloseableHttpClient client = HttpClients.createDefault();
+	
+	public InputStream Post(String url, String body) throws IOException {
 
-	    CloseableHttpClient client = HttpClients.createDefault();
-		HttpUriRequest req = RequestBuilder.post(url).setEntity(new StringEntity(body)).build();
-		CloseableHttpResponse res = client.execute(req);
+		System.out.println("http body: "+ body);
+		
+		StringEntity stringEntity = new StringEntity(body);
+		
+		
+	    HttpUriRequest req = RequestBuilder.post(url).setEntity(stringEntity).build();
+
+		
+		CloseableHttpResponse res;
+		try {
+			res = client.execute(req);
+		} catch (IOException e) {
+			System.out.println("http request faild " +e.getMessage());
+			e.printStackTrace();
+			throw e;
+		}
 		
 		HttpEntity entity = res.getEntity();
 		System.out.println("http status code: " +res.getStatusLine().getStatusCode());
 		
 		return entity.getContent();
 	}
+	
+
 }

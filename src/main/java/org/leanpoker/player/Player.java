@@ -29,6 +29,9 @@ public class Player {
 	public static int betRequest(JsonElement request) {
 		System.out.println("----incomming request--------");
 		try {
+			String jsonRequest = jsonHelper.toJson(request);
+			System.out.println("request json: " +jsonRequest);
+			
 			GameRequest req = jsonHelper.fromJson(request, GameRequest.class);
 			
 			System.out.println("game request is serialized now");
@@ -71,6 +74,7 @@ public class Player {
 	}
 	
 	
+	
 	private static Collection<Card> listCards(GameRequest request) {
 		List<Card> community = request.getCommunityCards();
 		List<Card> myCards = getMyPlayer(request).getHoleCards();
@@ -83,25 +87,25 @@ public class Player {
 		return request.getPlayers().get(myPos);
 	}
 
-	public static Card[] getCards(JsonObject roundObject) {
-		Card[] allCards = new Card[7];
-		int myPlayerPos = roundObject.get("in_action").getAsInt();
-		JsonObject player = roundObject.get("players").getAsJsonArray().get(myPlayerPos).getAsJsonObject();
-
-		JsonArray ownCards = player.get("hole_cards").getAsJsonArray();
-
-		JsonArray comCards = roundObject.get("community_cards").getAsJsonArray();
-
-		for (int i = 0; i < ownCards.size(); i++) {
-			allCards[i].setRank(ownCards.get(i).getAsJsonObject().get("rank").getAsInt());
-			allCards[i].setSuit(ownCards.get(i).getAsJsonObject().get("suit").getAsString());
-		}
-
-		for (int i = 0; i < comCards.size(); i++) {
-			allCards[i + ownCards.size()].setRank(comCards.get(i).getAsJsonObject().get("rank").getAsInt());
-			allCards[i + ownCards.size()].setSuit(comCards.get(i).getAsJsonObject().get("suit").getAsString());
-		}
-
-		return allCards;
-	}
+//	public static Card[] getCards(JsonObject roundObject) {
+//		Card[] allCards = new Card[7];
+//		int myPlayerPos = roundObject.get("in_action").getAsInt();
+//		JsonObject player = roundObject.get("players").getAsJsonArray().get(myPlayerPos).getAsJsonObject();
+//
+//		JsonArray ownCards = player.get("hole_cards").getAsJsonArray();
+//
+//		JsonArray comCards = roundObject.get("community_cards").getAsJsonArray();
+//
+//		for (int i = 0; i < ownCards.size(); i++) {
+//			allCards[i].setRank(ownCards.get(i).getAsJsonObject().get("rank").getAsInt());
+//			allCards[i].setSuit(ownCards.get(i).getAsJsonObject().get("suit").getAsString());
+//		}
+//
+//		for (int i = 0; i < comCards.size(); i++) {
+//			allCards[i + ownCards.size()].setRank(comCards.get(i).getAsJsonObject().get("rank").getAsInt());
+//			allCards[i + ownCards.size()].setSuit(comCards.get(i).getAsJsonObject().get("suit").getAsString());
+//		}
+//
+//		return allCards;
+//	}
 }
