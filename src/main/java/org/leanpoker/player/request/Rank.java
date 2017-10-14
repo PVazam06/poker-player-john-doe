@@ -13,6 +13,9 @@ public class Rank {
 		if (card1.getRank().equals(card2.getRank())) {
 			return false;
 		}
+		if(card1.getSuit().equals(card2.getSuit())) {
+			return false;
+		}
 		
 		return true;
 	}
