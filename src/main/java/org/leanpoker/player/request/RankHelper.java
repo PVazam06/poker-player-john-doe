@@ -15,12 +15,12 @@ public class RankHelper {
 			}
 			else
 			{
-				return req.getMinimum_raise();
+				return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet() + req.getMinimum_raise() + 1;
 			}
 		}
 		else if (req.getCurrentBuyIn() <= 10 * req.getSmallBlind())
 		{
-			return req.getCurrentBuyIn();
+			return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
 		}
 		
 		return 0;
