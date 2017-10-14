@@ -16,6 +16,10 @@ public class Rank {
 		if(card1.getSuit().equals(card2.getSuit())) {
 			return false;
 		}
+		if ((card1.getRank().equals("B") || card1.getRank().equals("K") || card1.getRank().equals("J")) &&
+				(card2.getRank().equals("B") || card2.getRank().equals("K") || card2.getRank().equals("J"))) {
+			return false;
+		}
 		
 		return true;
 	}
