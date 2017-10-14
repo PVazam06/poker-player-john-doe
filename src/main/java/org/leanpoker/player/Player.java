@@ -16,6 +16,7 @@ import org.apache.http.params.HttpParams;
 import org.leanpoker.player.model.Card;
 import org.leanpoker.player.request.GameRequest;
 import org.leanpoker.player.request.PlayerJson;
+import org.leanpoker.player.request.Rank;
 import org.leanpoker.player.request.RankApi;
 import org.leanpoker.player.request.RankHelper;
 import org.leanpoker.player.tools.JHttpClient;
@@ -38,6 +39,17 @@ public class Player {
 		Collection<Card> allCards = listCards(req);
 		//new RankApi().GetRank(cards)
 
+		try {
+			Card card1 = req.getPlayers().get(req.getIn_action()).getHoleCards().get(0);
+			Card card2 = req.getPlayers().get(req.getIn_action()).getHoleCards().get(1);
+			boolean fould = Rank.fould(card1, card2);
+			if (fould) {
+				return 0;
+			} 
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		
 		return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
 
 		//return 520;
