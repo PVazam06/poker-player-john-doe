@@ -40,8 +40,7 @@ public class Player {
 			
 			
 			Collection<Card> allCards = listCards(req);
-			
-			
+						
 			String json = jsonHelper.toJson(allCards);
 			json = "cards="+json;
 			
