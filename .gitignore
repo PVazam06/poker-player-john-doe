@@ -8,3 +8,5 @@ build
 .idea
 poker-player-java.iml
 /bin/
+/.classpath
+/.project
