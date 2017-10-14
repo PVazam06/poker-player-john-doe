@@ -11,8 +11,8 @@ public class HandStrenght {
 
 	public void calculateHandStrenght() {
 		int strenght = 0;
-		int hand1 = hand.getCards1().getRank();
-		int hand2 = hand.getCards2().getRank();
+//		int hand1 = hand.getCards1().getRank();
+//		int hand2 = hand.getCards2().getRank();
 	}
 
 
