@@ -27,9 +27,10 @@ public class Player {
 	public static int betRequest(JsonElement request) {
 		System.out.println("----incomming request--------");
 		try {
-
 			GameRequest req = jsonHelper.fromJson(request, GameRequest.class);
-
+			
+			System.out.println("game request is serialized now");
+			
 			Collection<Card> allCards = listCards(req);
 			
 			
