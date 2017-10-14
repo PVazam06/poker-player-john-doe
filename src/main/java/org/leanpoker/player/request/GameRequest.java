@@ -27,8 +27,12 @@ public class GameRequest {
     @Expose
     private String gameId;
     
+    @SerializedName("in_action")
+    @Expose
     private int in_action;
     
+    @SerializedName("minimum_raise")
+    @Expose
     private int minimum_raise;
     
     @SerializedName("round")
