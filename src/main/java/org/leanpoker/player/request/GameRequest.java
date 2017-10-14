@@ -58,40 +58,40 @@ public class GameRequest {
     @Expose
     private Integer pot;
     
-	private final JsonObject requestJson;
+//	private final JsonObject requestJson;
 
-    public GameRequest(JsonElement request) {
-    	requestJson = request.getAsJsonObject();
-		this.players = getPlayerArray("players");
-		this.tournamentId = getStringField("tournament_id");
-		this.gameId = getStringField("game_id");
-		this.round = getIntegerField("round");
-		this.betIndex = getIntegerField("bet_index");
-		this.smallBlind = getIntegerField("small_blind");
-		this.orbits = getIntegerField("orbits");
-		this.dealer = getIntegerField("dealer");
-		
-		this.currentBuyIn = getIntegerField("current_buy_in");
-		this.pot = getIntegerField("pot");
-	}
-    
-    private List<PlayerJson> getPlayerArray(String field) {
-    	List<PlayerJson> playerList = new ArrayList<PlayerJson>();
-		JsonArray playersArray = requestJson.get("players").getAsJsonArray();
-		for (JsonElement player : playersArray) {
-			PlayerJson p = new PlayerJson(player);
-			playerList.add(p);
-		}	
-		return playerList;
-	}
-
-	private Integer getIntegerField(String field) {
-		return requestJson.get(field).getAsInt();
-	}
-
-	private String getStringField(String field) {
-		return requestJson.get(field).getAsString();
-	}
+//    public GameRequest(JsonElement request) {
+//    	requestJson = request.getAsJsonObject();
+//		this.players = getPlayerArray("players");
+//		this.tournamentId = getStringField("tournament_id");
+//		this.gameId = getStringField("game_id");
+//		this.round = getIntegerField("round");
+//		this.betIndex = getIntegerField("bet_index");
+//		this.smallBlind = getIntegerField("small_blind");
+//		this.orbits = getIntegerField("orbits");
+//		this.dealer = getIntegerField("dealer");
+//		
+//		this.currentBuyIn = getIntegerField("current_buy_in");
+//		this.pot = getIntegerField("pot");
+//	}
+//    
+//    private List<PlayerJson> getPlayerArray(String field) {
+//    	List<PlayerJson> playerList = new ArrayList<PlayerJson>();
+//		JsonArray playersArray = requestJson.get("players").getAsJsonArray();
+//		for (JsonElement player : playersArray) {
+//			PlayerJson p = new PlayerJson(player);
+//			playerList.add(p);
+//		}	
+//		return playerList;
+//	}
+//
+//	private Integer getIntegerField(String field) {
+//		return requestJson.get(field).getAsInt();
+//	}
+//
+//	private String getStringField(String field) {
+//		return requestJson.get(field).getAsString();
+//	}
 
 	public List<PlayerJson> getPlayers() {
         return players;

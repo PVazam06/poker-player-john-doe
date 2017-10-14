@@ -1,5 +1,6 @@
 package org.leanpoker.player;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -14,8 +15,9 @@ public class Player {
     public static int betRequest(JsonElement request) {
     	
     	try {
-			GameRequest gameState = new GameRequest(request);
-		} catch (Exception e) {
+    		Gson g = new Gson();		
+    		GameRequest req = g.fromJson(request, GameRequest.class);
+    	} catch (Exception e) {
 			e.printStackTrace();
 		}
     	

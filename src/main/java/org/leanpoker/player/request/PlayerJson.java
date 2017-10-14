@@ -38,26 +38,26 @@ public class PlayerJson {
     @Expose
     private Integer id;
     
-	private JsonObject playerJson;
-
-    public PlayerJson(JsonElement player) {
-    	playerJson = player.getAsJsonObject();
-		this.name = getStringField("name");
-		this.stack = getIntegerField("stack");
-		this.status = getStringField("status");
-		this.bet = getIntegerField("bet");
-		// this. holeCards
-		this.version = getStringField("version");
-		this.id = getIntegerField("id");
-	}
-
-	private Integer getIntegerField(String field) {
-		return playerJson.get(field).getAsInt();
-	}
-
-	private String getStringField(String field) {
-		return playerJson.get(field).getAsString();
-	}
+//	private JsonObject playerJson;
+//
+//    public PlayerJson(JsonElement player) {
+//    	playerJson = player.getAsJsonObject();
+//		this.name = getStringField("name");
+//		this.stack = getIntegerField("stack");
+//		this.status = getStringField("status");
+//		this.bet = getIntegerField("bet");
+//		// this. holeCards
+//		this.version = getStringField("version");
+//		this.id = getIntegerField("id");
+//	}
+//
+//	private Integer getIntegerField(String field) {
+//		return playerJson.get(field).getAsInt();
+//	}
+//
+//	private String getStringField(String field) {
+//		return playerJson.get(field).getAsString();
+//	}
     
 	public String getName() {
         return name;
