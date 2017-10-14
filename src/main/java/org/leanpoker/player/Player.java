@@ -9,7 +9,9 @@ public class Player {
     static final String VERSION = "Default Java folding player";
 
     public static int betRequest(JsonElement request) {
-        return 5;
+    	String str = request.getAsString();
+        System.out.println(str);
+    	return 5;
     }
 
     public static void showdown(JsonElement game) {
