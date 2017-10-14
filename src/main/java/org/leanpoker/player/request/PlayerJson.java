@@ -3,6 +3,8 @@ package org.leanpoker.player.request;
 
 import java.util.List;
 
+import org.leanpoker.player.model.Card;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
@@ -28,7 +30,7 @@ public class PlayerJson {
     
     @SerializedName("hole_cards")
     @Expose
-    private List<Object> holeCards = null;
+    private List<Card> holeCards = null;
     
     @SerializedName("version")
     @Expose
@@ -91,11 +93,11 @@ public class PlayerJson {
         this.bet = bet;
     }
 
-    public List<Object> getHoleCards() {
+    public List<Card> getHoleCards() {
         return holeCards;
     }
 
-    public void setHoleCards(List<Object> holeCards) {
+    public void setHoleCards(List<Card> holeCards) {
         this.holeCards = holeCards;
     }
 

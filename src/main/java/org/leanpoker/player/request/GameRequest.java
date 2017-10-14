@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.leanpoker.player.PlayerServlet;
+import org.leanpoker.player.model.Card;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -25,6 +26,10 @@ public class GameRequest {
     @SerializedName("game_id")
     @Expose
     private String gameId;
+    
+    private int in_action;
+    
+    private int minimum_raise;
     
     @SerializedName("round")
     @Expose
@@ -48,7 +53,7 @@ public class GameRequest {
     
     @SerializedName("community_cards")
     @Expose
-    private List<Object> communityCards = null;
+    private List<Card> communityCards = null;
     
     @SerializedName("current_buy_in")
     @Expose
@@ -157,11 +162,11 @@ public class GameRequest {
         this.dealer = dealer;
     }
 
-    public List<Object> getCommunityCards() {
+    public List<Card> getCommunityCards() {
         return communityCards;
     }
 
-    public void setCommunityCards(List<Object> communityCards) {
+    public void setCommunityCards(List<Card> communityCards) {
         this.communityCards = communityCards;
     }
 
@@ -180,5 +185,21 @@ public class GameRequest {
     public void setPot(Integer pot) {
         this.pot = pot;
     }
+
+	public int getIn_action() {
+		return in_action;
+	}
+
+	public void setIn_action(int in_action) {
+		this.in_action = in_action;
+	}
+
+	public int getMinimum_raise() {
+		return minimum_raise;
+	}
+
+	public void setMinimum_raise(int minimum_raise) {
+		this.minimum_raise = minimum_raise;
+	}
 
 }
