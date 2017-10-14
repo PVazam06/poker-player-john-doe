@@ -13,6 +13,7 @@ import java.util.Map;
 import org.leanpoker.player.model.Card;
 import org.leanpoker.player.request.GameRequest;
 import org.leanpoker.player.request.PlayerJson;
+import org.leanpoker.player.request.RankHelper;
 import org.leanpoker.player.tools.JHttpClient;
 
 public class Player {
@@ -42,6 +43,8 @@ public class Player {
 			int rank = rankObject.getAsJsonObject().get("rank").getAsInt();
 			
 			System.out.println("our rank: "+ rank);
+			
+			int returnValue = RankHelper.getReturnValue(rank, req);
 
 			int minraise = req.getMinimum_raise();
 			
@@ -58,7 +61,8 @@ public class Player {
 
 	public static void showdown(JsonElement game) {
 	}
-
+	
+	
 	private static Collection<Card> listCards(GameRequest request) {
 		List<Card> community = request.getCommunityCards();
 		List<Card> myCards = getMyPlayer(request).getHoleCards();
