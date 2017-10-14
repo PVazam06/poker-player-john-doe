@@ -36,7 +36,11 @@ public class Player {
 		
 		GameRequest req = jsonHelper.fromJson(request, GameRequest.class);
 		Collection<Card> allCards = listCards(req);
-		//new RankApi().GetRank(cards)
+		
+		
+			int rank =  new RankApi().GetRank(allCards);
+		
+		
 
 		return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
 
