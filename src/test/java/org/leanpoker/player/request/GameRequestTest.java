@@ -1,14 +1,12 @@
-//package org.leanpoker.player.request;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//import org.junit.jupiter.api.Test;
-//
-//class GameRequestTest {
-//
-//	@Test
-//	void test() {
-//		fail("Not yet implemented");
-//	}
-//
-//}
+package org.leanpoker.player.request;
+
+import org.junit.Test;
+
+class GameRequestTest {
+
+	@Test
+	void test() {
+		//List<Hand>
+	}
+
+}

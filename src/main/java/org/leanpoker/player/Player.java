@@ -30,12 +30,12 @@ public class Player {
 
 	public static int betRequest(JsonElement request) {
 		System.out.println("----incomming request--------");
-		try {
-			//String jsonRequest = jsonHelper.toJson(request);
-			//System.out.println("request json: " +jsonRequest);
-			
-			req = jsonHelper.fromJson(request, GameRequest.class);
-			return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
+//		try {
+//			//String jsonRequest = jsonHelper.toJson(request);
+//			//System.out.println("request json: " +jsonRequest);
+//			
+//			req = jsonHelper.fromJson(request, GameRequest.class);
+//			return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
 			
 //			System.out.println("game request is serialized now");
 //			
@@ -61,20 +61,20 @@ public class Player {
 //			
 //			return returnValue;
 
-		}catch(JsonParseException jpe){
-			System.out.println("json pars exception");
-			jpe.printStackTrace();
-		}catch (Exception e) {
-			System.out.println("---------- error log out----------");
-			e.printStackTrace();
-			
-		}
-		
-		try {
-			return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+//		}catch(JsonParseException jpe){
+//			System.out.println("json pars exception");
+//			jpe.printStackTrace();
+//		}catch (Exception e) {
+//			System.out.println("---------- error log out----------");
+//			e.printStackTrace();
+//			
+//		}
+//		
+//		try {
+//			return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
 		return 520;
 	}
 
