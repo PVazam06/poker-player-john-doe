@@ -15,6 +15,8 @@ public class Player {
     	int currentByIn =  roundObject.get("current_buy_in").getAsInt();
     	int minRaise =  roundObject.get("minimum_raise").getAsInt();
     	
+    	int myPlayerPos = roundObject.get("in_action").getAsInt();
+    	//myPlayer = roundObject.get("players").getAsJsonArray().get(myPlayerPos);
     	
     	return minRaise;
     }
