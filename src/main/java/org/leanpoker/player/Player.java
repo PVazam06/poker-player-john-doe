@@ -31,46 +31,43 @@ public class Player {
 	public static int betRequest(JsonElement request) {
 		System.out.println("----incomming request--------");
 		try {
-			String jsonRequest = jsonHelper.toJson(request);
-			System.out.println("request json: " + jsonRequest);
+			//String jsonRequest = jsonHelper.toJson(request);
+			//System.out.println("request json: " +jsonRequest);
+			
 			req = jsonHelper.fromJson(request, GameRequest.class);
+			
 			System.out.println("game request is serialized now");
-		} catch (Exception e) {
+			
+			
+			Collection<Card> allCards = listCards(req);
+						
+			String json = jsonHelper.toJson(allCards);
+			json = "cards="+json;
+			
+			InputStream res = client.Post("http://rainman.leanpoker.org/rank", json);
+
+			JsonElement rankObject = jsonHelper.toJsonTree(res);
+			
+			int rank = rankObject.getAsJsonObject().get("rank").getAsInt();
+			
+			System.out.println("our rank: "+ rank);
+			
+			int returnValue = RankHelper.getReturnValue(rank, req);
+
+			int minraise = req.getMinimum_raise();
+			
+			System.out.println("min raise: " + minraise);
+			
+			return returnValue;
+
+		}catch(JsonParseException jpe){
+			System.out.println("json pars exception");
+			jpe.printStackTrace();
+		}catch (Exception e) {
+			System.out.println("---------- error log out----------");
 			e.printStackTrace();
+			
 		}
-		
-//		try {
-//			
-//			
-//			Collection<Card> allCards = listCards(req);
-//						
-//			String json = jsonHelper.toJson(allCards);
-//			json = "cards="+json;
-//			
-//			InputStream res = client.Post("http://rainman.leanpoker.org/rank", json);
-//
-//			JsonElement rankObject = jsonHelper.toJsonTree(res);
-//			
-//			int rank = rankObject.getAsJsonObject().get("rank").getAsInt();
-//			
-//			System.out.println("our rank: "+ rank);
-//			
-//			int returnValue = RankHelper.getReturnValue(rank, req);
-//
-//			int minraise = req.getMinimum_raise();
-//			
-//			System.out.println("min raise: " + minraise);
-//			
-//			return minraise;
-//
-//		}catch(JsonParseException jpe){
-//			System.out.println("json pars exception");
-//			jpe.printStackTrace();
-//		}catch (Exception e) {
-//			System.out.println("---------- error log out----------");
-//			e.printStackTrace();
-//			
-//		}
 		
 		try {
 			return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
