@@ -25,7 +25,7 @@ public class Player {
 	private static JHttpClient client = new JHttpClient();
 
 	public static int betRequest(JsonElement request) {
-
+		System.out.println("----incomming request--------");
 		try {
 
 			GameRequest req = jsonHelper.fromJson(request, GameRequest.class);
@@ -53,6 +53,7 @@ public class Player {
 			return minraise;
 
 		} catch (Exception e) {
+			System.out.println("---------- error log out----------");
 			e.printStackTrace();
 			return 1000;
 		}
