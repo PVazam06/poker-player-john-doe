@@ -29,11 +29,11 @@ public class GameRequest {
     
     @SerializedName("in_action")
     @Expose
-    private int in_action;
+    private Integer in_action;
     
     @SerializedName("minimum_raise")
     @Expose
-    private int minimum_raise;
+    private Integer minimum_raise;
     
     @SerializedName("round")
     @Expose
