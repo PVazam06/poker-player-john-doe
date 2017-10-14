@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +40,12 @@ public class Player {
 		Collection<Card> allCards = listCards(req);
 		
 		
-			int rank =  new RankApi().GetRank(allCards);
+			try {
+				int rank =  new RankApi().GetRank(allCards);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		
 		
 
