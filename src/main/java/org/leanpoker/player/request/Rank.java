@@ -10,6 +10,9 @@ public class Rank {
 		if (card1.getRank().equals("A") || card2.getRank().equals("A")) {
 			return false;
 		}
+		if (card1.getRank().equals(card2.getRank())) {
+			return false;
+		}
 		
 		return true;
 	}
