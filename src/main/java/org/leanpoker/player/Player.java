@@ -12,9 +12,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.params.HttpParams;
 import org.leanpoker.player.model.Card;
 import org.leanpoker.player.request.GameRequest;
 import org.leanpoker.player.request.PlayerJson;
+import org.leanpoker.player.request.RankApi;
 import org.leanpoker.player.request.RankHelper;
 import org.leanpoker.player.tools.JHttpClient;
 
@@ -31,7 +33,10 @@ public class Player {
 		String jsonRequest = jsonHelper.toJson(request);
 		System.out.println("request json: " + jsonRequest);
 
+		
 		GameRequest req = jsonHelper.fromJson(request, GameRequest.class);
+		Collection<Card> allCards = listCards(req);
+		//new RankApi().GetRank(cards)
 
 		return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
 
@@ -40,7 +45,7 @@ public class Player {
 	//// System.out.println("game request is serialized now");
 	////
 	////
-	//// Collection<Card> allCards = listCards(req);
+	//// 
 	////
 	//// String json = jsonHelper.toJson(allCards);
 	//// json = "cards="+json;

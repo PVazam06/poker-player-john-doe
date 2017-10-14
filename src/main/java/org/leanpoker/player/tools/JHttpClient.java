@@ -18,15 +18,15 @@ import com.google.gson.JsonElement;
 
 public class JHttpClient {
 
-   private CloseableHttpClient client = HttpClients.createDefault();
-	
+	private CloseableHttpClient client = HttpClients.createDefault();
+
 	public InputStream Post(String url, String body) throws IOException {
 
 		System.out.println("http body: "+ body);
 		
 		StringEntity stringEntity = new StringEntity(body);
 		
-		
+
 	    HttpUriRequest req = RequestBuilder.post(url).setEntity(stringEntity).build();
 
 		
@@ -44,6 +44,5 @@ public class JHttpClient {
 		
 		return entity.getContent();
 	}
-	
 
 }
