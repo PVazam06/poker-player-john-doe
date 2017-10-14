@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -12,12 +13,15 @@ import java.util.Map;
 import org.leanpoker.player.model.Card;
 import org.leanpoker.player.request.GameRequest;
 import org.leanpoker.player.request.PlayerJson;
+import org.leanpoker.player.tools.JHttpClient;
 
 public class Player {
 
 	static final String VERSION = "Default Java folding player";
 
 	private static Gson jsonHelper = new Gson();
+	
+	private static JHttpClient client = new JHttpClient();
 
 	public static int betRequest(JsonElement request) {
 
@@ -26,8 +30,18 @@ public class Player {
 			GameRequest req = jsonHelper.fromJson(request, GameRequest.class);
 
 			Collection<Card> allCards = listCards(req);
+			
+			
+			String json = jsonHelper.toJson(allCards);
+			json = "cards="+json;
+			
+			InputStream res = client.Post("http://rainman.leanpoker.org/rank", json);
 
-			System.out.println("output test");
+			JsonElement rankObject = jsonHelper.toJsonTree(res);
+			
+			int rank = rankObject.getAsJsonObject().get("rank").getAsInt();
+			
+			System.out.println("our rank: "+ rank);
 
 			int minraise = req.getMinimum_raise();
 			
