@@ -40,13 +40,13 @@ public class Player {
 		Collection<Card> allCards = listCards(req);
 		
 		
-			try {
-				int rank =  new RankApi().GetRank(allCards);
-				System.out.println("jrankingapi rank: " +rank);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+//			try {
+//				//int rank =  new RankApi().GetRank(allCards);
+//				//System.out.println("jrankingapi rank: " +rank);
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
 		
 		
 
