@@ -19,19 +19,22 @@ public class Player {
     	try {
     		Gson g = new Gson();		
     		GameRequest req = g.fromJson(request, GameRequest.class);
-    	} catch (Exception e) {
+    		
+    		JsonObject roundObject = request.getAsJsonObject();
+    		
+    		int currentByIn =  roundObject.get("current_buy_in").getAsInt();
+    		int minRaise =  roundObject.get("minimum_raise").getAsInt();
+    		
+    		Cards[] allCards = getCards(roundObject);
+    		System.out.println(allCards.toString());
+    		
+    		return minRaise;
+    		
+    	} catch (Exception e) {		
 			e.printStackTrace();
+			return 1000;
 		}
     	
-    	JsonObject roundObject = request.getAsJsonObject();
-    	
-    	int currentByIn =  roundObject.get("current_buy_in").getAsInt();
-    	int minRaise =  roundObject.get("minimum_raise").getAsInt();
-    	
-    	Cards[] allCards = getCards(roundObject);
-    	System.out.println(allCards.toString());
-    	
-    	return minRaise;
     }
 
     public static void showdown(JsonElement game) {
