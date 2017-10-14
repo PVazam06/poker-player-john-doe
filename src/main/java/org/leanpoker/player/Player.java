@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.InputStream;
 import java.util.Collection;
@@ -13,6 +15,7 @@ import java.util.Map;
 import org.leanpoker.player.model.Card;
 import org.leanpoker.player.request.GameRequest;
 import org.leanpoker.player.request.PlayerJson;
+import org.leanpoker.player.request.RankHelper;
 import org.leanpoker.player.tools.JHttpClient;
 
 public class Player {
@@ -24,11 +27,13 @@ public class Player {
 	private static JHttpClient client = new JHttpClient();
 
 	public static int betRequest(JsonElement request) {
-
+		System.out.println("----incomming request--------");
 		try {
-
 			GameRequest req = jsonHelper.fromJson(request, GameRequest.class);
-
+			
+			System.out.println("game request is serialized now");
+			
+			
 			Collection<Card> allCards = listCards(req);
 			
 			
@@ -42,6 +47,8 @@ public class Player {
 			int rank = rankObject.getAsJsonObject().get("rank").getAsInt();
 			
 			System.out.println("our rank: "+ rank);
+			
+			int returnValue = RankHelper.getReturnValue(rank, req);
 
 			int minraise = req.getMinimum_raise();
 			
@@ -49,7 +56,11 @@ public class Player {
 			
 			return minraise;
 
-		} catch (Exception e) {
+		}catch(JsonParseException jpe){
+			System.out.println("json pars exception");
+			jpe.printStackTrace();
+		}catch (Exception e) {
+			System.out.println("---------- error log out----------");
 			e.printStackTrace();
 			return 1000;
 		}
@@ -58,7 +69,8 @@ public class Player {
 
 	public static void showdown(JsonElement game) {
 	}
-
+	
+	
 	private static Collection<Card> listCards(GameRequest request) {
 		List<Card> community = request.getCommunityCards();
 		List<Card> myCards = getMyPlayer(request).getHoleCards();
