@@ -62,9 +62,9 @@ public class Player {
 		}catch (Exception e) {
 			System.out.println("---------- error log out----------");
 			e.printStackTrace();
-			return 1000;
+			
 		}
-
+		return 520;
 	}
 
 	public static void showdown(JsonElement game) {

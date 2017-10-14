@@ -24,6 +24,8 @@ public class JHttpClient {
 		CloseableHttpResponse res = client.execute(req);
 		
 		HttpEntity entity = res.getEntity();
+		System.out.println("http status code: " +res.getStatusLine().getStatusCode());
+		
 		return entity.getContent();
 	}
 }
