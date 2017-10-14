@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -25,11 +26,15 @@ public class JHttpClient {
 		System.out.println("http body: "+ body);
 		
 		StringEntity stringEntity = new StringEntity(body);
-		
+	    int timeout = 5;
+	    RequestConfig config = RequestConfig.custom()
+	      .setConnectTimeout(timeout * 100)
+	      .setConnectionRequestTimeout(timeout * 100)
+	      .setSocketTimeout(timeout * 100).build();
 
-	    HttpUriRequest req = RequestBuilder.post(url).setEntity(stringEntity).build();
+	    HttpUriRequest req = RequestBuilder.post(url).setConfig(config).setEntity(stringEntity).build();
 
-		
+
 		CloseableHttpResponse res;
 		try {
 			res = client.execute(req);

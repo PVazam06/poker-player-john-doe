@@ -2,6 +2,7 @@ package org.leanpoker.player.request;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.List;
 
 import org.leanpoker.player.model.Card;
@@ -15,7 +16,7 @@ public class RankApi {
 
 	private JHttpClient client = new JHttpClient();
 
-	public int GetRank(List<Card> cards) throws IOException {
+	public int GetRank(Collection<Card> cards) throws IOException {
 		
 		String json = jsonHelper.toJson(cards);
 		json = "cards=" + json;
