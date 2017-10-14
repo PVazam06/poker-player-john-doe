@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.InputStream;
 import java.util.Collection;
@@ -31,6 +33,7 @@ public class Player {
 			
 			System.out.println("game request is serialized now");
 			
+			
 			Collection<Card> allCards = listCards(req);
 			
 			
@@ -53,7 +56,10 @@ public class Player {
 			
 			return minraise;
 
-		} catch (Exception e) {
+		}catch(JsonParseException jpe){
+			System.out.println("json pars exception");
+			jpe.printStackTrace();
+		}catch (Exception e) {
 			System.out.println("---------- error log out----------");
 			e.printStackTrace();
 			return 1000;
