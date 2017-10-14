@@ -73,7 +73,7 @@ public class Player {
 			return req.getCurrentBuyIn() - req.getPlayers().get(req.getIn_action()).getBet();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		return 520;
 	}
 
